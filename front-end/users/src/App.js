@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import { Route, NavLink, withRouter } from "react-router-dom";
 import Login from "./components/Login";
+import SignUp from "./components/Signup";
 import "./App.css";
 
 class App extends React.Component {
@@ -24,8 +25,8 @@ class App extends React.Component {
 
         <main>
           <Route path="/login" component={Login} />
-          {/* <Route path="/signup" component={Signup} />
-        <Route path="/users" component={Users} />  */}
+          <Route path="/signup" component={SignUp} />
+          {/* <Route path="/users" component={Users} />  */}
         </main>
       </div>
     );
