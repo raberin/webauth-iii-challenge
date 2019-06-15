@@ -2,10 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
 
 const Users = require("../data/users/usersModel.js");
-// const secrets = require("./config/secrets.js");
+const tokenService = require("./token-service.js");
 
 router.post("/register", async (req, res) => {
   let user = req.body;
@@ -23,7 +22,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-//Promise Login request
+//Promise Login request -- try to do with async await
 router.post("/login", (req, res) => {
   let { username, password } = req.body;
 
@@ -31,9 +30,11 @@ router.post("/login", (req, res) => {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        // const token = tokenService.generateToken(user);
+        //Generates token
+        const token = tokenService.generateToken(user);
         res.status(200).json({
-          message: `Welcome ${user.username}!, have a token...`
+          message: `Welcome ${user.username}!, have a token...`,
+          token
         });
       } else {
         res.status(401).json({ message: "Invalid Credentials" });
