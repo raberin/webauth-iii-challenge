@@ -9,10 +9,7 @@ function findBy(filter) {
 }
 
 function add(user) {
-  //abstracting out the id from inserted user
-  const [id] = db("users").insert(user);
-
-  return findById(id);
+  return db("users").insert(user);
 }
 
 function findById(id) {

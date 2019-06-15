@@ -8,19 +8,10 @@ const Users = require("./usersModel.js");
 router.get("/", async (req, res) => {
   try {
     const users = await Users.find();
-    res.status(200).json();
+    res.status(200).json(users);
   } catch (err) {
     res.status(500).json({ message: "Error retrieving users" });
   }
 });
-
-//Promise get request
-// router.get("/", (req, res) => {
-//   Users.find()
-//     .then(users => {
-//       res.json(users);
-//     })
-//     .catch(err => res.send(err));
-// });
 
 module.exports = router;
